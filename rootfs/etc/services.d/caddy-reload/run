@@ -1,0 +1,16 @@
+#!/usr/bin/with-contenv sh
+
+log() {
+  if [[ "$@" ]]; then echo "[`date +'%Y-%m-%d %T'`] $@";
+  else echo; fi
+}
+
+CADDY_SITES="/etc/caddy/sites-enabled"
+
+# Check if config has changed
+#while RES=$(/usr/bin/inotifywait -q --format '%w%f %e' -e create,delete,modify $CADDY_SITES); do
+while RES=$(/usr/bin/inotifywait -q --format '%w/%f %e' -e close_write,delete $CADDY_SITES); do
+	log "Restarting CADDY due to changes in: $RES" >> /var/log/caddy-reload.log
+	#/usr/sbin/nginx -s reload
+done
+

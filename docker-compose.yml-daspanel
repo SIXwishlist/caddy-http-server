@@ -1,0 +1,66 @@
+
+version: '2'
+services:
+    daspanel-php-fpm-5.6:
+        image: daspanel/php-fpm-5.6
+        volumes:
+            - daspanel-data:/opt/daspanel/data
+        networks:
+            - backend
+        env_file:
+            - daspanel.env
+        ports:
+            - "9000"
+
+    daspanel-php-fpm-7.0:
+        image: daspanel/php-fpm-7.0
+        volumes:
+            - daspanel-data:/opt/daspanel/data
+        networks:
+            - backend
+        env_file:
+            - daspanel.env
+        ports:
+            - "9000"
+
+    daspanel-minio-fileserver:
+        image: daspanel/minio-fileserver
+        volumes:
+            - daspanel-data:/opt/daspanel/data
+        networks:
+            - frontend
+            - backend
+        ports:
+            - "9000:9000"
+        env_file:
+            - daspanel.env
+
+    daspanel-caddy-http-server:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        image: daspanel/caddy-http-server
+        volumes:
+            - daspanel-data:/opt/daspanel/data
+        networks:
+            - frontend
+            - backend
+        env_file:
+            - daspanel.env
+        ports:
+            - "80:80"
+            - "443:443"
+
+
+volumes:
+    daspanel-data:
+        external:
+            name: daspanel-data
+
+networks:  
+  frontend:
+    driver: bridge
+  backend:
+    driver: bridge
+
+

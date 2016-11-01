@@ -1,0 +1,39 @@
+#!/usr/bin/with-contenv sh
+
+log() {
+  if [[ "$@" ]]; then echo "[`date +'%Y-%m-%d %T'`] $@";
+  else echo; fi
+}
+
+if [ ! -d "/opt/daspanel/log/$DASPANEL_GUUID/caddy" ]; then
+	mkdir -p /opt/daspanel/log/$DASPANEL_GUUID/caddy
+fi
+
+if [ ! -d "/opt/daspanel/data/$DASPANEL_GUUID/content/_default" ]; then
+	mkdir -p /opt/daspanel/data/$DASPANEL_GUUID/content/_default
+fi
+
+if [ ! -f "/opt/daspanel/data/$DASPANEL_GUUID/content/_default/index.html" ]; then
+  cp /opt/daspanel/default/caddy/content/index.html /opt/daspanel/data/$DASPANEL_GUUID/content/_default/index.html
+fi
+
+if [ ! -d "/opt/daspanel/data/$DASPANEL_GUUID/conf/caddy/etc/caddy/sites-available" ]; then
+    mkdir -p /opt/daspanel/data/$DASPANEL_GUUID/conf/caddy/etc/caddy/sites-available
+fi
+
+if [ ! -d "/opt/daspanel/data/$DASPANEL_GUUID/conf/caddy/etc/caddy/sites-enabled" ]; then
+    mkdir -p /opt/daspanel/data/$DASPANEL_GUUID/conf/caddy/etc/caddy/sites-enabled
+fi
+
+if [ -d "/etc/caddy/sites-available" ]; then
+    rm -Rf /etc/caddy/sites-available
+fi
+
+if [ -d "/etc/caddy/sites-enabled" ]; then
+    rm -Rf /etc/caddy/sites-enabled
+fi
+
+ln -sf /opt/daspanel/data/$DASPANEL_GUUID/conf/caddy/etc/caddy/sites-available /etc/caddy/sites-available
+ln -sf /opt/daspanel/data/$DASPANEL_GUUID/conf/caddy/etc/caddy/sites-enabled /etc/caddy/sites-enabled
+
+

@@ -1,0 +1,22 @@
+# default port binded
+daspanel.site:80 :80 {
+    log / /opt/daspanel/log/{$DASPANEL_GUUID}/caddy/_default-access.log "{>Referer} {remote} {when} {method} {uri} {proto} {status} {size} {>User-Agent} {latency} {request}" {
+        rotate {
+            size 10 # Rotate after 10 MB
+            age  14  # Keep log files for 14 days
+            keep 10  # Keep at most 10 log files
+        }
+    }
+    errors {
+        log /opt/daspanel/log/{$DASPANEL_GUUID}/caddy/_default-error.log {
+            size 10 # Rotate after 10 MB
+            age  7  # Keep log files for 14 days
+            keep 5  # Keep at most 10 log files
+        }
+    }
+    gzip
+    tls off
+    root /opt/daspanel/data/{$DASPANEL_GUUID}/content/_default
+}
+
+import sites-enabled/*.conf
