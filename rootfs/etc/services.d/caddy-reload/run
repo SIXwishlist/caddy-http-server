@@ -11,6 +11,7 @@ CADDY_SITES="/etc/caddy/sites-enabled"
 #while RES=$(/usr/bin/inotifywait -q --format '%w%f %e' -e create,delete,modify $CADDY_SITES); do
 while RES=$(/usr/bin/inotifywait -q --format '%w/%f %e' -e close_write,delete $CADDY_SITES); do
 	log "Restarting CADDY due to changes in: $RES" >> /var/log/caddy-reload.log
+    s6-svc -h /var/run/s6/services/caddy
 	#/usr/sbin/nginx -s reload
 done
 
