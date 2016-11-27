@@ -1,5 +1,13 @@
 #!/usr/bin/with-contenv sh
 
+# Master admin email must be informed
+if [ -z "$DASPANEL_HOST" ]; then
+    echo "***"
+    echo "ERROR: You must set the env variable DASPANEL_HOST to a valid value"
+    echo "***"
+    exit 1
+fi
+
 log() {
   if [[ "$@" ]]; then echo "[`date +'%Y-%m-%d %T'`] $@";
   else echo; fi
@@ -36,4 +44,8 @@ fi
 ln -sf /opt/daspanel/data/$DASPANEL_GUUID/conf/caddy/etc/caddy/sites-available /etc/caddy/sites-available
 ln -sf /opt/daspanel/data/$DASPANEL_GUUID/conf/caddy/etc/caddy/sites-enabled /etc/caddy/sites-enabled
 
+# Configure caddy
+/usr/bin/templater -d \
+  -o /etc/caddy/caddyfile \
+  /opt/daspanel/conf-templates/etc/caddy/caddyfile.tmpl
 
