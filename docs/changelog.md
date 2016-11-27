@@ -17,9 +17,27 @@ Released by Abner G Jacobsen, Sun 27 Nov 2016 -
 [see the diff](https://github.com/admindaspanel/caddy-http-server/compare/...#diff)
 ______________
 
-### 0.1.2
+### caddy-http-server-0.1.2
 __Changes__
 
+- See changes in CHANGELOG.md
+- bumped to version 0.1.2
+- /etc/caddy/caddyfile now is generated when the container is started using templates from /opt/daspanel/conf-templates/etc/caddy/caddyfile.tmpl and ENV variables.
+
+__Contributors__
+
+- Abner G Jacobsen
+
+Released by Abner G Jacobsen, Sun 27 Nov 2016 -
+[see the diff](https://github.com/admindaspanel/caddy-http-server/compare/...#diff)
+______________
+
+### 0.1.3
+__Changes__
+
+- bumped to version 0.1.3
+- Implemented api. ands3. endpoints in the caddy server
+- See changes in CHANGELOG.md
 - bumped to version 0.1.2
 - /etc/caddy/caddyfile now is generated when the container is started using templates from /opt/daspanel/conf-templates/etc/caddy/caddyfile.tmpl and ENV variables.
 - See changes in CHANGELOG.md
@@ -33,7 +51,7 @@ __Contributors__
 - Abner G Jacobsen
 
 Released by Abner G Jacobsen, Sun 27 Nov 2016 -
-[see the diff](https://github.com/admindaspanel/caddy-http-server/compare/d427dbca71ccdbb60f3f1557175ec101d8b63bf6...0.1.2#diff)
+[see the diff](https://github.com/admindaspanel/caddy-http-server/compare/d427dbca71ccdbb60f3f1557175ec101d8b63bf6...0.1.3#diff)
 ______________
 
 
