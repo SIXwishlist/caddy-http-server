@@ -19,4 +19,51 @@
     root /opt/daspanel/data/{{ envString "DASPANEL_GUUID" }}/content/_default
 }
 
+api.{{ envString "DASPANEL_HOST" }}:80 {
+    log / /opt/daspanel/log/{{ envString "DASPANEL_GUUID" }}/caddy/api-access.log "{>Referer} {remote} {when} {method} {uri} {proto} {status} {size} {>User-Agent} {latency} {request}" { 
+        rotate {
+            size 10 # Rotate after 10 MB
+            age  14  # Keep log files for 14 days
+            keep 10  # Keep at most 10 log files
+        }
+    }
+    errors {
+        log /opt/daspanel/log/{{ envString "DASPANEL_GUUID" }}/caddy/api-error.log {
+            size 10 # Rotate after 10 MB
+            age  7  # Keep log files for 14 days
+            keep 5  # Keep at most 10 log files
+        }
+    }
+    tls off
+    #proxy / daspanel-api-connexion:8080 {
+    #    proxy_header Host {host}
+    #}
+    proxy / daspanel-api:8080
+
+}
+
+s3.{{ envString "DASPANEL_HOST" }}:80 {
+    log / /opt/daspanel/log/{{ envString "DASPANEL_GUUID" }}/caddy/s3-access.log "{>Referer} {remote} {when} {method} {uri} {proto} {status} {size} {>User-Agent} {latency} {request}" { 
+        rotate {
+            size 10 # Rotate after 10 MB
+            age  14  # Keep log files for 14 days
+            keep 10  # Keep at most 10 log files
+        }
+    }
+    errors {
+        log /opt/daspanel/log/{{ envString "DASPANEL_GUUID" }}/caddy/s3-error.log {
+            size 10 # Rotate after 10 MB
+            age  7  # Keep log files for 14 days
+            keep 5  # Keep at most 10 log files
+        }
+    }
+    tls off
+    proxy / daspanel-s3-server:9000 {
+        header_upstream X-Forwarded-Proto {scheme}
+        header_upstream X-Forwarded-Host {host}
+        header_upstream Host {host}
+    }
+}
+
+
 import sites-enabled/*.conf
