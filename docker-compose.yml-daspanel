@@ -1,6 +1,18 @@
 
 version: '2'
 services:
+    daspanel-mariadb:
+        image: daspanel/mariadb
+        volumes:
+            - daspanel-data:/opt/daspanel/data
+        networks:
+            - backend
+        ports:
+            - "3306:3306"
+        env_file:
+            - daspanel.env
+            - smtp.env
+
     daspanel-php-fpm-5.6:
         image: daspanel/php-fpm-5.6
         volumes:
