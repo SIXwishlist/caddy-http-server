@@ -21,8 +21,8 @@
 
 {{ envString "DASPANEL_HOST" }}:80/svc/adminer {
     root /opt/daspanel/services/adminer
-    log /var/log/caddy/adminer.log
-    errors /var/log/caddy/adminer-error.log
+    log /opt/daspanel/log/{{ envString "DASPANEL_GUUID" }}/caddy/adminer-access.log
+    errors /opt/daspanel/log/{{ envString "DASPANEL_GUUID" }}/caddy/adminer-error.log
     gzip
     tls off
     fastcgi / localhost:5020 php
