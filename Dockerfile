@@ -1,12 +1,13 @@
 FROM daspanel/alpine-base
 MAINTAINER Abner G Jacobsen - http://daspanel.com <admin@daspanel.com>
 
-ENV TZ="UTC"
+# Set default env variables
+ENV \
+    # Stop container initialization if error occurs in cont-init.d, fix-attrs.d script's
+    S6_BEHAVIOUR_IF_STAGE2_FAILS=2 \
 
-# Stop container initialization if error occurs in cont-init.d fix-attrs.d script's
-ENV S6_BEHAVIOUR_IF_STAGE2_FAILS=2
-
-LABEL caddy_version="0.9.3" architecture="amd64"
+    # Timezone
+    TZ="UTC" 
 
 ARG CADDY_PLUGINS="cors,expires,ipfilter,locale,minify,ratelimit,realip,cloudflare,digitalocean,linode,route53"
 ARG CADDY_URL="https://caddyserver.com/download/build?os=linux&arch=amd64&features=${CADDY_PLUGINS}"
