@@ -14,12 +14,13 @@ ARG CADDY_URL="https://caddyserver.com/download/build?os=linux&arch=amd64&featur
 
 RUN apk update && \
   apk --update --no-cache add --virtual build_deps curl && \
-  apk add --no-cache --update mailcap inotify-tools && \
+  apk add --no-cache --update libcap mailcap inotify-tools && \
   curl --silent --show-error --fail --location \
       --header "Accept: application/tar+gzip, application/x-gzip, application/octet-stream" -o - \
       "${CADDY_URL}" \
   | tar --no-same-owner -C /usr/sbin/ -xz caddy && \
   chmod 0755 /usr/sbin/caddy && \
+  setcap "cap_net_bind_service=+ep" /usr/sbin/caddy && \
   apk del build_deps && \
   rm -rf \
     /var/cache/apk/* \
