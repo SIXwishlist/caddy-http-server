@@ -1,6 +1,7 @@
 #!/usr/bin/with-contenv sh
 
 STARTCMD="su-exec daspanel:daspanel /usr/sbin/caddy --conf=/etc/caddy/caddyfile"
+#STARTCMD="/usr/sbin/caddy --conf=/etc/caddy/caddyfile"
 
 [[ -z "${CADDY_AGREE}" ]] && CADDY_AGREE="true"
 [[ -z "${CADDY_CA}" ]] && CADDY_CA="https://acme-staging.api.letsencrypt.org/directory"

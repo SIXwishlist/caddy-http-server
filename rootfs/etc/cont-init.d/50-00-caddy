@@ -49,3 +49,7 @@ ln -sf /opt/daspanel/data/$DASPANEL_GUUID/conf/caddy/etc/caddy/sites-enabled /et
   -o /etc/caddy/caddyfile \
   /opt/daspanel/conf-templates/etc/caddy/caddyfile.tmpl
 
+# secure daspanel
+chown -R daspanel:daspanel /opt/daspanel/data
+chown -R daspanel:daspanel /opt/daspanel/log
+
