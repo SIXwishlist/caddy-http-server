@@ -69,9 +69,26 @@ Released by Abner G Jacobsen, Sat 10 Dec 2016 -
 [see the diff](https://github.com/admindaspanel/caddy-http-server/compare/...#diff)
 ______________
 
-### 0.1.5
+### caddy-http-server-0.1.5
 __Changes__
 
+- See changes in CHANGELOG.md
+- bumped to version 0.1.5
+- Added Adminer configuration.
+
+__Contributors__
+
+- Abner G Jacobsen
+
+Released by Abner G Jacobsen, Wed 21 Dec 2016 -
+[see the diff](https://github.com/admindaspanel/caddy-http-server/compare/...#diff)
+______________
+
+### 0.1.6
+__Changes__
+
+- bumped to version 0.1.6
+- See changes in CHANGELOG.md
 - bumped to version 0.1.5
 - Added Adminer configuration.
 - See changes in CHANGELOG.md
@@ -101,7 +118,7 @@ __Contributors__
 - Abner G Jacobsen
 
 Released by Abner G Jacobsen, Wed 21 Dec 2016 -
-[see the diff](https://github.com/admindaspanel/caddy-http-server/compare/d427dbca71ccdbb60f3f1557175ec101d8b63bf6...0.1.5#diff)
+[see the diff](https://github.com/admindaspanel/caddy-http-server/compare/d427dbca71ccdbb60f3f1557175ec101d8b63bf6...0.1.6#diff)
 ______________
 
 
