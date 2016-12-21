@@ -19,13 +19,13 @@
     root /opt/daspanel/data/{{ envString "DASPANEL_GUUID" }}/content/_default
 }
 
-{{ envString "DASPANEL_HOST" }}:80/svc/adminer {
+adminer.svc.{{ envString "DASPANEL_HOST" }}:80 {
     root /opt/daspanel/services/adminer
     log /opt/daspanel/log/{{ envString "DASPANEL_GUUID" }}/caddy/adminer-access.log
     errors /opt/daspanel/log/{{ envString "DASPANEL_GUUID" }}/caddy/adminer-error.log
     gzip
     tls off
-    fastcgi / localhost:5020 php
+    fastcgi / daspanel-php-fpm-7.0:9001 php
 }
 
 api.{{ envString "DASPANEL_HOST" }}:80 {
