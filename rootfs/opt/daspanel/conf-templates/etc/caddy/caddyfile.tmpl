@@ -35,12 +35,12 @@ admin.{{ envString "DASPANEL_HOST" }}:80 {
         }
     }
     tls off
-    proxy / daspanel-cpweb:5000 {
+    proxy / daspanel-panel:5000 {
         header_upstream Host {host}
         header_upstream X-Real-IP {remote}
         header_upstream X-Forwarded-For {remote}
     }
-    #proxy / daspanel-cpweb:5000
+    #proxy / daspanel-panel:5000
 
 }
 
