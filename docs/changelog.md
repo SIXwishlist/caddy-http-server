@@ -113,9 +113,25 @@ Released by Abner G Jacobsen, Thu 09 Feb 2017 -
 [see the diff](https://github.com/admindaspanel/caddy-http-server/compare/...#diff)
 ______________
 
-### 0.1.8
+### caddy-http-server-0.1.8
 __Changes__
 
+- See changes in CHANGELOG.md
+- bumped to version 0.1.8
+- Chnaged name of docker instance running control panel web.
+
+__Contributors__
+
+- Abner G Jacobsen
+
+Released by Abner G Jacobsen, Fri 17 Feb 2017 -
+[see the diff](https://github.com/admindaspanel/caddy-http-server/compare/...#diff)
+______________
+
+### 0.1.8-3ab0eec-dirty
+__Changes__
+
+- See changes in CHANGELOG.md
 - bumped to version 0.1.8
 - Chnaged name of docker instance running control panel web.
 - See changes in CHANGELOG.md
@@ -153,7 +169,7 @@ __Contributors__
 - Abner G Jacobsen
 
 Released by Abner G Jacobsen, Fri 17 Feb 2017 -
-[see the diff](https://github.com/admindaspanel/caddy-http-server/compare/d427dbca71ccdbb60f3f1557175ec101d8b63bf6...0.1.8#diff)
+[see the diff](https://github.com/admindaspanel/caddy-http-server/compare/d427dbca71ccdbb60f3f1557175ec101d8b63bf6...0.1.8-3ab0eec-dirty#diff)
 ______________
 
 

@@ -76,7 +76,7 @@ api.{{ envString "DASPANEL_HOST" }}:80 {
 
 }
 
-s3.{{ envString "DASPANEL_HOST" }}:80 {
+s3.svc.{{ envString "DASPANEL_HOST" }}:80 {
     log / /opt/daspanel/log/{{ envString "DASPANEL_GUUID" }}/caddy/s3-access.log "{>Referer} {remote} {when} {method} {uri} {proto} {status} {size} {>User-Agent} {latency} {request}" { 
         rotate {
             size 10 # Rotate after 10 MB
@@ -92,7 +92,7 @@ s3.{{ envString "DASPANEL_HOST" }}:80 {
         }
     }
     tls off
-    proxy / daspanel-s3-server:9000 {
+    proxy / daspanel-storage:9000 {
         header_upstream X-Forwarded-Proto {scheme}
         header_upstream X-Forwarded-Host {host}
         header_upstream Host {host}
