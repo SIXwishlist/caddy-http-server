@@ -1,6 +1,6 @@
 # default port binded
-{{ envString "DASPANEL_HOST" }}:80 {
-    log / /opt/daspanel/log/{{ envString "DASPANEL_GUUID" }}/caddy/_default-access.log "{>Referer} {remote} {when} {method} {uri} {proto} {status} {size} {>User-Agent} {latency} {request}" { 
+{{getenv "DASPANEL_SYS_HOST" "daspanel.site"}}:80 {
+    log / /opt/daspanel/log/{{getenv "DASPANEL_SYS_UUID"}}/caddy/_default-access.log "{>Referer} {remote} {when} {method} {uri} {proto} {status} {size} {>User-Agent} {latency} {request}" { 
         rotate {
             size 10 # Rotate after 10 MB
             age  14  # Keep log files for 14 days
@@ -8,7 +8,7 @@
         }
     }
     errors {
-        log /opt/daspanel/log/{{ envString "DASPANEL_GUUID" }}/caddy/_default-error.log {
+        log /opt/daspanel/log/{{getenv "DASPANEL_SYS_UUID"}}/caddy/_default-error.log {
             size 10 # Rotate after 10 MB
             age  7  # Keep log files for 14 days
             keep 5  # Keep at most 10 log files
@@ -16,11 +16,11 @@
     }
     gzip
     tls off
-    root /opt/daspanel/data/{{ envString "DASPANEL_GUUID" }}/content/_default
+    root /opt/daspanel/data/{{getenv "DASPANEL_SYS_UUID"}}/content/_default
 }
 
-admin.{{ envString "DASPANEL_HOST" }}:80 {
-    log / /opt/daspanel/log/{{ envString "DASPANEL_GUUID" }}/caddy/api-access.log "{>Referer} {remote} {when} {method} {uri} {proto} {status} {size} {>User-Agent} {latency} {request}" { 
+admin.{{getenv "DASPANEL_SYS_HOST" "daspanel.site"}}:80 {
+    log / /opt/daspanel/log/{{getenv "DASPANEL_SYS_UUID"}}/caddy/api-access.log "{>Referer} {remote} {when} {method} {uri} {proto} {status} {size} {>User-Agent} {latency} {request}" { 
         rotate {
             size 10 # Rotate after 10 MB
             age  14  # Keep log files for 14 days
@@ -28,7 +28,7 @@ admin.{{ envString "DASPANEL_HOST" }}:80 {
         }
     }
     errors {
-        log /opt/daspanel/log/{{ envString "DASPANEL_GUUID" }}/caddy/api-error.log {
+        log /opt/daspanel/log/{{getenv "DASPANEL_SYS_UUID"}}/caddy/api-error.log {
             size 10 # Rotate after 10 MB
             age  7  # Keep log files for 14 days
             keep 5  # Keep at most 10 log files
@@ -44,17 +44,17 @@ admin.{{ envString "DASPANEL_HOST" }}:80 {
 
 }
 
-adminer.svc.{{ envString "DASPANEL_HOST" }}:80 {
+adminer.svc.{{getenv "DASPANEL_SYS_HOST" "daspanel.site"}}:80 {
     root /opt/daspanel/services/adminer
-    log /opt/daspanel/log/{{ envString "DASPANEL_GUUID" }}/caddy/adminer-access.log
-    errors /opt/daspanel/log/{{ envString "DASPANEL_GUUID" }}/caddy/adminer-error.log
+    log /opt/daspanel/log/{{getenv "DASPANEL_SYS_UUID"}}/caddy/adminer-access.log
+    errors /opt/daspanel/log/{{getenv "DASPANEL_SYS_UUID"}}/caddy/adminer-error.log
     gzip
     tls off
     fastcgi / daspanel-php-fpm-7.0:9001 php
 }
 
-api.{{ envString "DASPANEL_HOST" }}:80 {
-    log / /opt/daspanel/log/{{ envString "DASPANEL_GUUID" }}/caddy/api-access.log "{>Referer} {remote} {when} {method} {uri} {proto} {status} {size} {>User-Agent} {latency} {request}" { 
+api.{{getenv "DASPANEL_SYS_HOST" "daspanel.site"}}:80 {
+    log / /opt/daspanel/log/{{getenv "DASPANEL_SYS_UUID"}}/caddy/api-access.log "{>Referer} {remote} {when} {method} {uri} {proto} {status} {size} {>User-Agent} {latency} {request}" { 
         rotate {
             size 10 # Rotate after 10 MB
             age  14  # Keep log files for 14 days
@@ -62,7 +62,7 @@ api.{{ envString "DASPANEL_HOST" }}:80 {
         }
     }
     errors {
-        log /opt/daspanel/log/{{ envString "DASPANEL_GUUID" }}/caddy/api-error.log {
+        log /opt/daspanel/log/{{getenv "DASPANEL_SYS_UUID"}}/caddy/api-error.log {
             size 10 # Rotate after 10 MB
             age  7  # Keep log files for 14 days
             keep 5  # Keep at most 10 log files
@@ -76,8 +76,8 @@ api.{{ envString "DASPANEL_HOST" }}:80 {
 
 }
 
-s3.svc.{{ envString "DASPANEL_HOST" }}:80 {
-    log / /opt/daspanel/log/{{ envString "DASPANEL_GUUID" }}/caddy/s3-access.log "{>Referer} {remote} {when} {method} {uri} {proto} {status} {size} {>User-Agent} {latency} {request}" { 
+s3.svc.{{getenv "DASPANEL_SYS_HOST" "daspanel.site"}}:80 {
+    log / /opt/daspanel/log/{{getenv "DASPANEL_SYS_UUID"}}/caddy/s3-access.log "{>Referer} {remote} {when} {method} {uri} {proto} {status} {size} {>User-Agent} {latency} {request}" { 
         rotate {
             size 10 # Rotate after 10 MB
             age  14  # Keep log files for 14 days
@@ -85,7 +85,7 @@ s3.svc.{{ envString "DASPANEL_HOST" }}:80 {
         }
     }
     errors {
-        log /opt/daspanel/log/{{ envString "DASPANEL_GUUID" }}/caddy/s3-error.log {
+        log /opt/daspanel/log/{{getenv "DASPANEL_SYS_UUID"}}/caddy/s3-error.log {
             size 10 # Rotate after 10 MB
             age  7  # Keep log files for 14 days
             keep 5  # Keep at most 10 log files
@@ -93,6 +93,29 @@ s3.svc.{{ envString "DASPANEL_HOST" }}:80 {
     }
     tls off
     proxy / daspanel-storage:9000 {
+        header_upstream X-Forwarded-Proto {scheme}
+        header_upstream X-Forwarded-Host {host}
+        header_upstream Host {host}
+    }
+}
+
+mail.svc.{{getenv "DASPANEL_SYS_HOST" "daspanel.site"}}:80 {
+    log / /opt/daspanel/log/{{getenv "DASPANEL_SYS_UUID"}}/caddy/mail-access.log "{>Referer} {remote} {when} {method} {uri} {proto} {status} {size} {>User-Agent} {latency} {request}" { 
+        rotate {
+            size 10 # Rotate after 10 MB
+            age  14  # Keep log files for 14 days
+            keep 10  # Keep at most 10 log files
+        }
+    }
+    errors {
+        log /opt/daspanel/log/{{getenv "DASPANEL_SYS_UUID"}}/caddy/mail-error.log {
+            size 10 # Rotate after 10 MB
+            age  7  # Keep log files for 14 days
+            keep 5  # Keep at most 10 log files
+        }
+    }
+    tls off
+    proxy / daspanel-mail-catcher:8025 {
         header_upstream X-Forwarded-Proto {scheme}
         header_upstream X-Forwarded-Host {host}
         header_upstream Host {host}

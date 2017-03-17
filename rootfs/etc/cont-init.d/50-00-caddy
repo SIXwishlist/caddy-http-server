@@ -1,36 +1,38 @@
 #!/usr/bin/with-contenv sh
 
-# Master admin email must be informed
-if [ -z "$DASPANEL_HOST" ]; then
+# Installation UUID must be informed
+if [ -z "$DASPANEL_SYS_UUID" ]; then
     echo "***"
-    echo "ERROR: You must set the env variable DASPANEL_HOST to a valid value"
+    echo "ERROR: You must set the env variable DASPANEL_SYS_UUID to a valid UUID"
     echo "***"
     exit 1
 fi
+
+export DASPANEL_SYS_HOSTNAME=`cat /opt/daspanel/data/$DASPANEL_SYS_UUID/db/sysconfig.json | /usr/bin/jq -r '.sys.hostname'`
 
 log() {
   if [[ "$@" ]]; then echo "[`date +'%Y-%m-%d %T'`] $@";
   else echo; fi
 }
 
-if [ ! -d "/opt/daspanel/log/$DASPANEL_GUUID/caddy" ]; then
-	mkdir -p /opt/daspanel/log/$DASPANEL_GUUID/caddy
+if [ ! -d "/opt/daspanel/log/$DASPANEL_SYS_UUID/caddy" ]; then
+	mkdir -p /opt/daspanel/log/$DASPANEL_SYS_UUID/caddy
 fi
 
-if [ ! -d "/opt/daspanel/data/$DASPANEL_GUUID/content/_default" ]; then
-	mkdir -p /opt/daspanel/data/$DASPANEL_GUUID/content/_default
+if [ ! -d "/opt/daspanel/data/$DASPANEL_SYS_UUID/content/_default" ]; then
+	mkdir -p /opt/daspanel/data/$DASPANEL_SYS_UUID/content/_default
 fi
 
-if [ ! -f "/opt/daspanel/data/$DASPANEL_GUUID/content/_default/index.html" ]; then
-  cp /opt/daspanel/default/caddy/content/index.html /opt/daspanel/data/$DASPANEL_GUUID/content/_default/index.html
+if [ ! -f "/opt/daspanel/data/$DASPANEL_SYS_UUID/content/_default/index.html" ]; then
+  cp /opt/daspanel/default/caddy/content/index.html /opt/daspanel/data/$DASPANEL_SYS_UUID/content/_default/index.html
 fi
 
-if [ ! -d "/opt/daspanel/data/$DASPANEL_GUUID/conf/caddy/etc/caddy/sites-available" ]; then
-    mkdir -p /opt/daspanel/data/$DASPANEL_GUUID/conf/caddy/etc/caddy/sites-available
+if [ ! -d "/opt/daspanel/data/$DASPANEL_SYS_UUID/conf/caddy/etc/caddy/sites-available" ]; then
+    mkdir -p /opt/daspanel/data/$DASPANEL_SYS_UUID/conf/caddy/etc/caddy/sites-available
 fi
 
-if [ ! -d "/opt/daspanel/data/$DASPANEL_GUUID/conf/caddy/etc/caddy/sites-enabled" ]; then
-    mkdir -p /opt/daspanel/data/$DASPANEL_GUUID/conf/caddy/etc/caddy/sites-enabled
+if [ ! -d "/opt/daspanel/data/$DASPANEL_SYS_UUID/conf/caddy/etc/caddy/sites-enabled" ]; then
+    mkdir -p /opt/daspanel/data/$DASPANEL_SYS_UUID/conf/caddy/etc/caddy/sites-enabled
 fi
 
 if [ -d "/etc/caddy/sites-available" ]; then
@@ -41,13 +43,13 @@ if [ -d "/etc/caddy/sites-enabled" ]; then
     rm -Rf /etc/caddy/sites-enabled
 fi
 
-ln -sf /opt/daspanel/data/$DASPANEL_GUUID/conf/caddy/etc/caddy/sites-available /etc/caddy/sites-available
-ln -sf /opt/daspanel/data/$DASPANEL_GUUID/conf/caddy/etc/caddy/sites-enabled /etc/caddy/sites-enabled
+ln -sf /opt/daspanel/data/$DASPANEL_SYS_UUID/conf/caddy/etc/caddy/sites-available /etc/caddy/sites-available
+ln -sf /opt/daspanel/data/$DASPANEL_SYS_UUID/conf/caddy/etc/caddy/sites-enabled /etc/caddy/sites-enabled
 
 # Configure caddy
-/usr/bin/templater -d \
-  -o /etc/caddy/caddyfile \
-  /opt/daspanel/conf-templates/etc/caddy/caddyfile.tmpl
+/usr/bin/gomplate -d cfg=file:///opt/daspanel/data/$DASPANEL_SYS_UUID/db/sysconfig.json \
+  < /opt/daspanel/conf-templates/etc/caddy/caddyfile.tmpl \
+  > /etc/caddy/caddyfile
 
 # secure daspanel
 chown -R daspanel:daspanel /opt/daspanel/data

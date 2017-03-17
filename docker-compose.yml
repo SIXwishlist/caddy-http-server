@@ -1,13 +1,9 @@
-
 version: '2'
 services:
     daspanel-caddy-http-server:
-        build:
-            context: .
-            dockerfile: Dockerfile
         image: daspanel/caddy-http-server
         volumes:
-            - daspanel-data:/opt/daspanel/data
+            - ./data:/opt/daspanel/data
         networks:
             - frontend
             - backend
@@ -16,12 +12,6 @@ services:
         ports:
             - "80:80"
             - "443:443"
-
-volumes:
-    daspanel-data:
-        external:
-            name: daspanel-data
-
 networks:  
   frontend:
     driver: bridge
