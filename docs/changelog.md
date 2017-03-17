@@ -128,9 +128,27 @@ Released by Abner G Jacobsen, Fri 17 Feb 2017 -
 [see the diff](https://github.com/admindaspanel/caddy-http-server/compare/...#diff)
 ______________
 
-### 0.1.9
+### caddy-http-server-0.1.9
 __Changes__
 
+- See changes in CHANGELOG.md
+- bumped to version 0.1.9
+- Changed internal name of storage server.
+
+__Contributors__
+
+- Abner G Jacobsen
+
+Released by Abner G Jacobsen, Wed 08 Mar 2017 -
+[see the diff](https://github.com/admindaspanel/caddy-http-server/compare/...#diff)
+______________
+
+### 0.1.10
+__Changes__
+
+- bumped to version 0.1.10
+- Make container compatible with new Daspanel init/configuration system
+- See changes in CHANGELOG.md
 - bumped to version 0.1.9
 - Changed internal name of storage server.
 - See changes in CHANGELOG.md
@@ -170,8 +188,8 @@ __Contributors__
 
 - Abner G Jacobsen
 
-Released by Abner G Jacobsen, Wed 08 Mar 2017 -
-[see the diff](https://github.com/admindaspanel/caddy-http-server/compare/d427dbca71ccdbb60f3f1557175ec101d8b63bf6...0.1.9#diff)
+Released by Abner G Jacobsen, Fri 17 Mar 2017 -
+[see the diff](https://github.com/admindaspanel/caddy-http-server/compare/d427dbca71ccdbb60f3f1557175ec101d8b63bf6...0.1.10#diff)
 ______________
 
 
