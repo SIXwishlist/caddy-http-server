@@ -62,11 +62,26 @@ Released by Abner G Jacobsen, Fri 17 Mar 2017 -
 [see the diff](https://github.com/admindaspanel/caddy-http-server/compare/...#diff)
 ______________
 
+### caddy-http-server-0.1.11
+__Changes__
+
+- See changes in CHANGELOG.md
+- bumped to version 0.1.11
+- Small fix
+
+__Contributors__
+
+- Abner G Jacobsen
+
+Released by Abner G Jacobsen, Fri 17 Mar 2017 -
+[see the diff](https://github.com/admindaspanel/caddy-http-server/compare/...#diff)
+______________
+
 ### caddy-http-server-0.1.2
 __Changes__
 
 
-Released by N/A, Fri 17 Mar 2017 -
+Released by N/A, Mon 27 Mar 2017 -
 [see the diff](https://github.com/admindaspanel/caddy-http-server/compare/...#diff)
 ______________
 
@@ -181,9 +196,12 @@ Released by Abner G Jacobsen, Wed 08 Mar 2017 -
 [see the diff](https://github.com/admindaspanel/caddy-http-server/compare/...#diff)
 ______________
 
-### 0.1.11
+### 0.2.0
 __Changes__
 
+- bumped to version 0.2.0
+- Daspanel's optional services are now accessed as a standalone container as a redirect proxy.
+- See changes in CHANGELOG.md
 - bumped to version 0.1.11
 - Small fix
 - See changes in CHANGELOG.md
@@ -229,8 +247,8 @@ __Contributors__
 
 - Abner G Jacobsen
 
-Released by Abner G Jacobsen, Fri 17 Mar 2017 -
-[see the diff](https://github.com/admindaspanel/caddy-http-server/compare/d427dbca71ccdbb60f3f1557175ec101d8b63bf6...0.1.11#diff)
+Released by Abner G Jacobsen, Mon 27 Mar 2017 -
+[see the diff](https://github.com/admindaspanel/caddy-http-server/compare/d427dbca71ccdbb60f3f1557175ec101d8b63bf6...0.2.0#diff)
 ______________
 
 
