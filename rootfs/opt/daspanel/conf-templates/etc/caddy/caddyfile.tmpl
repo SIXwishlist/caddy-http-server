@@ -44,15 +44,6 @@ admin.{{getenv "DASPANEL_SYS_HOST" "daspanel.site"}}:80 {
 
 }
 
-adminer.svc.{{getenv "DASPANEL_SYS_HOST" "daspanel.site"}}:80 {
-    root /opt/daspanel/services/adminer
-    log /opt/daspanel/log/{{getenv "DASPANEL_SYS_UUID"}}/caddy/adminer-access.log
-    errors /opt/daspanel/log/{{getenv "DASPANEL_SYS_UUID"}}/caddy/adminer-error.log
-    gzip
-    tls off
-    fastcgi / daspanel-php-fpm-7.0:9001 php
-}
-
 api.{{getenv "DASPANEL_SYS_HOST" "daspanel.site"}}:80 {
     log / /opt/daspanel/log/{{getenv "DASPANEL_SYS_UUID"}}/caddy/api-access.log "{>Referer} {remote} {when} {method} {uri} {proto} {status} {size} {>User-Agent} {latency} {request}" { 
         rotate {
@@ -117,6 +108,29 @@ mail.svc.{{getenv "DASPANEL_SYS_HOST" "daspanel.site"}}:80 {
     tls off
     proxy / daspanel-mail-catcher:8025 {
         header_upstream X-Forwarded-Proto {scheme}
+        header_upstream X-Forwarded-Host {host}
+        header_upstream Host {host}
+    }
+}
+
+adminer.svc.{{getenv "DASPANEL_SYS_HOST" "daspanel.site"}}:80 {
+    log / /opt/daspanel/log/{{getenv "DASPANEL_SYS_UUID"}}/caddy/proxy-adminer-access.log { 
+        rotate {
+            size 10 # Rotate after 10 MB
+            age  14  # Keep log files for 14 days
+            keep 10  # Keep at most 10 log files
+        }
+    }
+    errors {
+        log /opt/daspanel/log/{{getenv "DASPANEL_SYS_UUID"}}/caddy/proxy-adminer-error.log {
+            size 10 # Rotate after 10 MB
+            age  7  # Keep log files for 14 days
+            keep 5  # Keep at most 10 log files
+        }
+    }
+    tls off
+    proxy / daspanel-services:8080 {
+        #header_upstream X-Forwarded-Proto {scheme}
         header_upstream X-Forwarded-Host {host}
         header_upstream Host {host}
     }
